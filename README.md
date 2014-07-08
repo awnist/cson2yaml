@@ -2,11 +2,11 @@
 
 cson2yaml is a node.js module that turns CSON/JSON into YAML and [RAML](http://raml.org/)
 
-It uses [csonmason](https://github.com/awnist/csonmason) under the hood to provide an extensible cson format.
+It uses [xcson](https://github.com/awnist/xcson) under the hood to provide an extensible cson format.
 
 ## Why?
 
-Because writing RAML sucks when your project gets large. Look at the csonmason docs and see what you can do with the format.
+Because writing RAML sucks when your project gets large. Look at the xcson docs and see what you can do with the format.
 
 ## Installation
 

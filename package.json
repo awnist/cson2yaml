@@ -2,7 +2,7 @@
   "name": "cson2yaml",
   "description": "cson2yaml",
   "author": "Awnist <hi@awnist.com> (http://awnist.com)",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./lib/cson2yaml",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "schema"
   ],
   "dependencies": {
-    "csonmason": "0.0.3",
+    "xcson": "0.0.3",
     "typeof": "~1.0.0"
   },
   "scripts": {

@@ -1,4 +1,4 @@
-csonmason = require 'csonmason'
+xcson = require 'xcson'
 type = require 'typeof'
 
 indentBy = '  '
@@ -63,5 +63,5 @@ stringify = (data) ->
   return "---" + handlers[type(data)](data) + "\n"
 
 module.exports = cson2yaml = (file) ->
-  stringify new csonmason(file).toObject()
+  stringify new xcson(file).toObject()
 
