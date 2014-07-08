@@ -1,0 +1,30 @@
+{
+  "name": "cson2yaml",
+  "description": "cson2yaml",
+  "author": "Awnist <hi@awnist.com> (http://awnist.com)",
+  "version": "0.0.1",
+  "main": "./lib/cson2yaml",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:awnist/cson2yaml.git"
+  },
+  "license": {
+    "type": "Public Domain",
+    "url": "http://unlicense.org/"
+  },
+  "keywords": [
+    "cson",
+    "json",
+    "raml",
+    "yaml",
+    "mixin",
+    "schema"
+  ],
+  "dependencies": {
+    "csonmason": "0.0.3",
+    "typeof": "~1.0.0"
+  },
+  "scripts": {
+    "prepublish": "coffee -o lib/ -c src/"
+  }
+}
