@@ -63,5 +63,8 @@ stringify = (data) ->
   return "---" + handlers[type(data)](data) + "\n"
 
 module.exports = cson2yaml = (file) ->
-  stringify new xcson(file).toObject()
-
+  
+  if typeof file is 'object'
+    stringify file
+  else
+    stringify new xcson(file).toObject()
