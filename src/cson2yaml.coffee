@@ -18,8 +18,7 @@ stringify = (data) ->
 
       for a in arr
         handler = handlers[type(a)]
-        # throw new Error("what the crap: " + type(y))  unless handler
-        output += "\n" + indents(indentLevel) + "- " + handler(a)
+        output += "\n" + indents(indentLevel) + "- " + handler(a, 1)
 
       indentLevel--
 
@@ -33,19 +32,33 @@ stringify = (data) ->
 
     number: (n) -> n
 
-    object: (obj) ->
+    object: (obj, extratab=0) ->
 
-      output = ""
       indentLevel++
 
-      for key, val of obj
+      # If we need an extra tab, we're probably in an array layout:
+      # - foo:
+      indentThis = "\n" + indents(indentLevel+extratab)
+
+      output = (for key, val of obj
         handler = handlers[type(val)]
         continue if type(val) is "undefined" or not handler
-        output += "\n" + indents(indentLevel) + "#{key}: #{handler(val)}"
+        "#{key}: #{handler(val)}"
+      ).join(indentThis)
 
       indentLevel--
 
-      return output or '{}'
+      return "{}" unless output
+
+      # If this was an array style layout, don't add a newline+tab to the first
+      # line
+      # - foo:
+      # NOT
+      # -
+      # foo:
+      leadIndent = if extratab then "" else indentThis
+
+      return leadIndent + output
 
     string: (str) ->
       return "\"#{str}\"" if str.match /^(true|false|undefined|null)$/
@@ -63,7 +76,7 @@ stringify = (data) ->
   return "---" + handlers[type(data)](data) + "\n"
 
 module.exports = cson2yaml = (file) ->
-  
+
   if typeof file is 'object'
     stringify file
   else
