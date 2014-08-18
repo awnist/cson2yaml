@@ -43,7 +43,13 @@ stringify = (data) ->
       output = (for key, val of obj
         handler = handlers[type(val)]
         continue if type(val) is "undefined" or not handler
-        "#{key}: #{handler(val)}"
+
+        if type(val) is 'object' and val._alias
+          alias = "&"+val._alias
+          delete val._alias
+          "#{key}: #{alias}#{handler(val)}"
+        else
+          "#{key}: #{handler(val)}"
       ).join(indentThis)
 
       indentLevel--
@@ -63,13 +69,11 @@ stringify = (data) ->
     string: (str) ->
       return "\"#{str}\"" if str.match /^(true|false|undefined|null)$/
 
-      safestr = JSON.stringify(str).replace /^"|"$/g, ""
-
       # This is a multiline string
-      if safestr.match /\\n/
-        return "|\n" + indents(indentLevel+1) + safestr.replace(/(\\n|\\r)/g, "\n" +indents(indentLevel+1))
-
-      safestr
+      if str.match /\n|\r/
+        return "|\n" + indents(indentLevel+1) + str.replace(/(\n|\r)/g, "\n" + indents(indentLevel+1))
+      else
+        return str #JSON.stringify(str).replace /^"|"$/g, ""
 
     undefined: -> "null"
 
