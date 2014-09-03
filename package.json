@@ -2,7 +2,7 @@
   "name": "cson2yaml",
   "description": "cson2yaml",
   "author": "Awnist <hi@awnist.com> (http://awnist.com)",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "./lib/cson2yaml",
   "repository": {
     "type": "git",

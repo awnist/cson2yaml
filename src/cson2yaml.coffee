@@ -44,10 +44,10 @@ stringify = (data) ->
         handler = handlers[type(val)]
         continue if type(val) is "undefined" or not handler
 
-        if type(val) is 'object' and val._alias
-          alias = "&"+val._alias
-          delete val._alias
-          "#{key}: #{alias}#{handler(val)}"
+        if type(val) is 'object' and val._label
+          label = "&"+val._label
+          delete val._label
+          "#{key}: #{label}#{handler(val)}"
         else
           "#{key}: #{handler(val)}"
       ).join(indentThis)
@@ -67,7 +67,7 @@ stringify = (data) ->
       return leadIndent + output
 
     string: (str) ->
-      return "\"#{str}\"" if str.match /^(true|false|undefined|null)$/
+      return "\"#{str}\"" if str.match /^(true|false|undefined|null|\*)$/
 
       # This is a multiline string
       if str.match /\n|\r/
